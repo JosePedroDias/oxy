@@ -1,0 +1,17 @@
+{
+    "port":       8080,
+    "logLevel":   1,
+    "monochrome": false,
+    "replaceWithFile": [
+        {
+            "from": "http://www.sapo.pt/js/libs/modernizr-2.0.6.min.js",
+            "to":   "/tmp/mod.js"
+        }
+    ],
+    "replaceWithUrl": [
+        {
+            "from": "http://i.s.sl.pt/v2011/XL_f9ff46d0dcb508ce21cb24c8b0a9d11b.jpg",
+            "to":   "http://i.s.sl.pt/v2011/XL_79611931073d68505087328628e8d0e3.jpg"
+        }
+    ]
+}

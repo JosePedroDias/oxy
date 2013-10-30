@@ -1,0 +1,33 @@
+#! /usr/bin/env node
+
+
+
+var fs  = require('fs'),
+	oxy = require('../lib/index');
+
+
+
+var cfgPath = process.argv.pop();
+
+var s, o;
+try {
+	s = fs.readFileSync(cfgPath).toString();
+
+} catch (ex) {
+	console.error('Could not open configuration file ' + cfgPath);
+	process.exit(1);
+}
+
+try {
+	o = JSON.parse(s);
+} catch (ex) {
+	console.error('Could not parse configuration: ' + ex.message);
+	process.exit(2);
+}
+
+try {
+	oxy(o);
+} catch (ex) {
+	console.error(ex.message ? ex.message : ex);
+	process.exit(3);
+}
