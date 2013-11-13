@@ -26,26 +26,48 @@
 
 
 
-# sample configuration with comments
+# configuring oxy
 
+* `port`       - integer, local proxy server port
+
+* `logLevel`   - integer. defaults to 0: 0=quiet, 1=log changed requests, 2=log all requests
+
+* `monochrome` - boolean, defaults to falsy. if trueish, the logs are not colored
+
+* `replaceWithFile` - array of rules.
+    For each rule:
+    * `from`   - string, url to match to
+    * `string` - string, file to serve instead
+    * `mime`   - optional string, to specify the mime type of not correctly asserted
+    
+* `replaceWithUrl` - array of rules.
+    For each rule:
+    * `from`   - string, url to match to
+    * `string` - string, url to proxy instead
+   
+   
+A sample configuration follows:
+   
+```javascript
     {
-        "port": 8080         // integer, local proxy server port
+        "port": 8080,
 
-        "logLevel": 1,       // integer. defaults to 0: 0=quiet, 1=log changed requests, 2=log all request
+        "logLevel": 1,
 
-        "monochrome": false, // boolean, defaults to falsy
+        "monochrome": false,
 
-        "replaceWithFile": [ // array of rules
+        "replaceWithFile": [
             {
-                "from": "http://www.google.com/asd.js", // string, url to match to
-                "to":   "/asd.js"                       // string, file to serve instead
-                "mime": "text/javascript"               // optional string, to specify the mime type of not correctly asserted
+                "from": "http://www.google.com/asd.js",
+                "to":   "/asd.js"
+                "mime": "text/javascript"
             }
         ],
-        "replaceWithUrl": [ // array of rules
+        "replaceWithUrl": [
             {
-                "from": "http://www.asd.com/a.jpg", // string, url to match to
-                "to":   "http://localhost/a.jpg"    // string, url to proxy instead
+                "from": "http://www.asd.com/a.jpg",
+                "to":   "http://localhost/a.jpg"
             }
         ]
     }
+```
