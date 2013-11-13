@@ -49,25 +49,25 @@
 A sample configuration follows:
    
 ```javascript
-    {
-        "port": 8080,
+{
+    "port": 8080,
 
-        "logLevel": 1,
+    "logLevel": 1,
 
-        "monochrome": false,
+    "monochrome": false,
 
-        "replaceWithFile": [
-            {
-                "from": "http://www.google.com/asd.js",
-                "to":   "/asd.js"
-                "mime": "text/javascript"
-            }
-        ],
-        "replaceWithUrl": [
-            {
-                "from": "http://www.asd.com/a.jpg",
-                "to":   "http://localhost/a.jpg"
-            }
-        ]
-    }
+    "replaceWithFile": [
+        {
+            "from": "http://www.google.com/asd.js",
+            "to":   "/asd.js"
+            "mime": "text/javascript"
+        }
+    ],
+    "replaceWithUrl": [
+        {
+            "from": "http://www.asd.com/a.jpg",
+            "to":   "http://localhost/a.jpg"
+        }
+    ]
+}
 ```
