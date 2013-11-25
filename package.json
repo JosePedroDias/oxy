@@ -1,6 +1,6 @@
 {
     "name": "oxy",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "description": "HTTP proxy to aid in web dev",
     "main": "lib/index.js",
     "preferGlobal": true,

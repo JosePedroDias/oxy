@@ -1,9 +1,9 @@
-#! /usr/bin/env node
+#!/usr/bin/env node
 
 
 
 var fs  = require('fs'),
-	oxy = require('../lib/index');
+    oxy = require('../lib/index');
 
 
 
@@ -11,24 +11,27 @@ var cfgPath = process.argv.pop();
 
 var s, o;
 try {
-	s = fs.readFileSync(cfgPath).toString();
+    s = fs.readFileSync(cfgPath).toString();
 
 } catch (ex) {
-	console.error('Could not open configuration file ' + cfgPath);
-	process.exit(1);
+    console.error('Could not open configuration file ' + cfgPath);
+    process.exit(1);
 }
 
 try {
-	//o = JSON.parse(s);
-  o = eval('"use strict"; var t = ' + s + '; t');
+    //o = JSON.parse(s);
+    o = eval('"use strict"; var t = ' + s + '; t');
+    if (!o.port) {
+        o.port = 8080;
+    }
 } catch (ex) {
-	console.error('Could not parse configuration: ' + ex.message);
-	process.exit(2);
+    console.error('Could not parse configuration: ' + ex.message);
+    process.exit(2);
 }
 
 try {
-	oxy(o);
+    oxy(o);
 } catch (ex) {
-	console.error(ex.message ? ex.message : ex);
-	process.exit(3);
+    console.error(ex.message ? ex.message : ex);
+    process.exit(3);
 }

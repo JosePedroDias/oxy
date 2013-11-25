@@ -45,14 +45,16 @@ It is now eval'ed so comments and functions can now be defined.
 
 * `replaceWithFile` - array of rules. The first matched rule is applied. If none is applied, uses next plugin...
     For each rule:
-    * `from`   - 1) string, url to match to OR 2) a function which receives(reqUrl, req) and which should return a path (string) if replace is to be done
-    * `to`     - string, file to serve instead (optional if from is a function)
-    * `mime`   - optional string, to specify the mime type if not correctly asserted. oxy uses a lookup table with a couple of common extensions and use the to url's extension to assert the mime type
+    * `from`         - 1) string to match to OR 2) regexp to match to OR 3) a function which receives `(url, req)` and which should return a path (string) if replace is to be done
+    * `to`           - string: file to serve instead (optional if `from` is a function). regexp match replaces `$1`, `$2` accordingly
+    * `partialMatch` - if from is a string, partial matches are accepted and replaced (`from` partial match is replaced with `to`)
+    * `mime`         - optional string: to specify the mime type if not correctly asserted. oxy uses a lookup table with a couple of common extensions and use the to url's extension to assert the mime type
     
 * `replaceWithUrl` - array of rules. The first matched rule is applied...
     For each rule:
-    * `from`   - 1) string, url to match to OR 2) a function which receives(reqUrl, req) and which should return a new url (string) if replace is to be done
-    * `to`     - string, url to proxy instead (optional if from is a function)
+    * `from`         - 1) string to match to OR 2) regexp to match to OR 3) a function which receives `(url, req)` and which should return a new URL (string) if replace is to be done
+    * `to`           - string, URL to proxy instead (optional if `from` is a function). regexp match replaces `$1`, `$2` accordingly
+    * `partialMatch` - if from is a string, partial matches are accepted and replaced (`from` partial match is replaced with `to`)
    
    
 A sample configuration follows:
@@ -66,11 +68,15 @@ A sample configuration follows:
     monochrome: false, // false is default. set true do disable console colors
 
     replaceWithFile: [
-        { // regular replace url with local file
+        { // regular replace URL with local file
             from: "http://www.google.com/asd.js",
             to:   "/home/user/asd.js",
             mime: "text/javascript" // this is asserted automatically from the js extension on the to field
         },
+        { // regular replace URL with file (regexp)
+            from: /http:\/\/aaa\.bbb\.com/,
+            to:   '/home/user/clown.png'
+        }
         { // replace URL by local file if having extension...
             from: function(u) {
                 var t = u.split('.');
@@ -91,6 +97,11 @@ A sample configuration follows:
                 if (u.indexOf('/asd/') === -1) { return; }
                 return u.replace('x.com', 'y.com');
             }
+        },
+        { // regular URL replace (partial)
+            from: 'http://aaa.com/Bundles/Video',
+            to:   'http://localhost/Bundles/Video',
+            partialMatch: true
         },
         { // replace URL if having extension...
             from: function(u) {
@@ -113,6 +124,12 @@ A sample configuration follows:
 
 
 # changelog
+
+## 0.0.3 Monday, the 25th of November 2013
+
+* support for regexps in `from`
+* support for `partialMatch` with `from` strings
+
 
 ## 0.0.2 Monday, the 25th of November 2013
 
