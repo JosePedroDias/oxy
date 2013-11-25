@@ -19,7 +19,8 @@ try {
 }
 
 try {
-	o = JSON.parse(s);
+	//o = JSON.parse(s);
+  o = eval('"use strict"; var t = ' + s + '; t');
 } catch (ex) {
 	console.error('Could not parse configuration: ' + ex.message);
 	process.exit(2);
