@@ -9,14 +9,15 @@
 
 # feature set, implemented as plugins:
 
-* replace URL by other URL  (replaceWithUrl)
-* replace URL by local file (replaceWithFile)
+* replace URL with other URL  (replaceWithUrl)
+* replace URL with local file (replaceWithFile)
 
 
 
 # notes
 
-* this proxy doesn't handle HTTPS requests. if you have a simple solution for this I'd love to hear it.
+This proxy doesn't handle HTTPS requests.  
+If you have a simple solution for this I'd love to hear it.
 
 
 
