@@ -7,7 +7,7 @@
 
 
 
-# feature set
+# feature set, implemented as plugins:
 
 * replace URL by other URL  (replaceWithUrl)
 * replace URL by local file (replaceWithFile)
@@ -121,6 +121,36 @@ A sample configuration follows:
     ]
 }
 ```
+
+
+# plugin interface
+
+Everything in the `lib` folder besides `index.js` are plugins.
+
+Plugins are loaded only if mentioned in the configuration (as keys).
+
+A plugin is a function with the following interface:
+
+`function(req, res, cfgAll, log, warn, error)`
+
+`req` and `res` are respectively the request and response HTTP objects.  
+`cfgAll` is the parsed JS for the loaded configuration file.  
+`log`, `warn` and `error` are functions passed for sharing console output methods between plugins (this should be revised, kinda ugly).
+
+
+
+# roadmap
+
+* HTTPS support (would love this, even if simple passthru)
+
+* reload configuration on change?
+
+* refactor plugin interface
+
+* DOM manipulation plugin? (haven't think this through because so far I didn't need this feature for my work)
+
+* NOTICE: I may drop this project in favor of other similar project (such as nProxy or magicProxy), given it fulfills these objectives
+
 
 
 # changelog
